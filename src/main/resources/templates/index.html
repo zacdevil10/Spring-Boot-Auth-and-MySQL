@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+    </head>
+    <body>
+
+        <span th:utext="${name}"></span>
+
+        <form th:action="@{/login}" method="get" th:style="${login}">
+            <button type="submit">Log In</button>
+        </form>
+
+        <form th:action="@{/logout}" method="get" th:style="${logout}">
+            <button type="submit">Log Out</button>
+        </form>
+
+    </body>
+</html>
