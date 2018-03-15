@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.appsbystudio.rockets.rockets.rockets.Rocket;
+import uk.co.appsbystudio.rockets.rockets.rockets.RocketService;
 import uk.co.appsbystudio.rockets.rockets.users.User;
 import uk.co.appsbystudio.rockets.rockets.users.UserService;
 
@@ -18,6 +20,9 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RocketService rocketService;
 
     @RequestMapping(value = {"/", "/home", "/index"}, method = RequestMethod.GET)
     public ModelAndView home() {
@@ -34,6 +39,27 @@ public class AuthController {
             modelAndView.addObject("login", "display: block;");
         }
         modelAndView.setViewName("index");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin/rocket-editor", method = RequestMethod.GET)
+    public ModelAndView rocketEditor() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("admin/rocket-editor");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin/rocket-editor", method = RequestMethod.POST)
+    public ModelAndView addNewRocket(@Valid Rocket rocket, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("admin/rocket-editor");
+        } else {
+            rocketService.saveRocket(rocket);
+            modelAndView.addObject("rocket", new Rocket());
+            modelAndView.setViewName("admin/rocket-editor");
+        }
         return modelAndView;
     }
 
