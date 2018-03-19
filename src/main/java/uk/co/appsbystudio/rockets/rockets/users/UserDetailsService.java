@@ -9,13 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
-    @Qualifier("userRepository")
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findUserByEmail(email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userService.findUserByName(username);
         return new UserPrincipal(user);
     }
 }

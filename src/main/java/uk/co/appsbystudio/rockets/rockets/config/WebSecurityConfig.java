@@ -42,15 +42,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/home", "/index", "/register").permitAll()
+                .antMatchers("/", "/home", "/index", "/register", "/api/user/create", "/api/user/all").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .csrf().disable()
             .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/")
-                .usernameParameter("email")
-                .passwordParameter("password")
+                .usernameParameter("username")
+                .passwordParameter("pass_hash")
                 .permitAll()
                 .and()
             .logout()

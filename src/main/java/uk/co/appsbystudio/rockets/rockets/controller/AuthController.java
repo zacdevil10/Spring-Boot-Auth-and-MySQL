@@ -28,7 +28,7 @@ public class AuthController {
     public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
+        User user = userService.findUserByName(auth.getName());
         if (user != null) {
             modelAndView.addObject("name", "Welcome " + user.getName());
             modelAndView.addObject("login", "display: none;");
@@ -85,7 +85,7 @@ public class AuthController {
         User userExists = userService.findUserByEmail(user.getEmail());
 
         if (userExists != null) {
-            bindingResult.rejectValue("email", "error.email", "There is already a user registered with this email.");
+            bindingResult.rejectValue("username", "error.username", "There is already a user registered with this username.");
         }
 
         if (bindingResult.hasErrors()) {
