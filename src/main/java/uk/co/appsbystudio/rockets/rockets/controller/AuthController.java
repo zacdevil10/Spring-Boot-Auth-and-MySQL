@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.appsbystudio.rockets.rockets.rockets.Rocket;
 import uk.co.appsbystudio.rockets.rockets.rockets.RocketService;
-import uk.co.appsbystudio.rockets.rockets.users.User;
-import uk.co.appsbystudio.rockets.rockets.users.UserService;
+import uk.co.appsbystudio.rockets.rockets.users.model.User;
+import uk.co.appsbystudio.rockets.rockets.users.service.UserService;
 
 import javax.validation.Valid;
 

@@ -9,9 +9,9 @@
             Invalid username or password.
         </div>
         <form th:action="@{/register}" th:object="${user}" method="post">
-            <div><label> Name: <input type="text" id="name" name="name"/> </label></div>
+            <div><label> Username: <input type="text" id="username" name="username"/> </label></div>
             <div><label> Email: <input type="text" id="email" name="email"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
+            <div><label> Password: <input type="pass_hash" name="pass_hash"/> </label></div>
             <div><input type="submit" value="Register"/></div>
         </form>
     </body>

@@ -2,6 +2,7 @@ package uk.co.appsbystudio.rockets.rockets.users;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import uk.co.appsbystudio.rockets.rockets.users.model.User;
 
 import java.util.Collection;
 

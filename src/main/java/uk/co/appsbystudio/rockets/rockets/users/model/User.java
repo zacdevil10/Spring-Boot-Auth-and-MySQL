@@ -1,4 +1,4 @@
-package uk.co.appsbystudio.rockets.rockets.users;
+package uk.co.appsbystudio.rockets.rockets.users.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;

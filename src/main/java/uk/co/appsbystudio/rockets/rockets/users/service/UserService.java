@@ -1,4 +1,6 @@
-package uk.co.appsbystudio.rockets.rockets.users;
+package uk.co.appsbystudio.rockets.rockets.users.service;
+
+import uk.co.appsbystudio.rockets.rockets.users.model.User;
 
 import java.util.List;
 
@@ -9,5 +11,6 @@ public interface UserService {
     User findUserByEmail(String name);
     boolean isUserExist(User user);
     void saveUser(User user);
+    void deleteUser(User user);
 
 }

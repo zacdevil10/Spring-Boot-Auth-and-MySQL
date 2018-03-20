@@ -1,14 +1,14 @@
 package uk.co.appsbystudio.rockets.rockets.users;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import uk.co.appsbystudio.rockets.rockets.users.model.User;
+import uk.co.appsbystudio.rockets.rockets.users.service.UserService;
 
 import java.util.List;
 
@@ -57,6 +57,32 @@ public class UserAPIRequests {
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
+    /* UPDATE USER */
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
+        System.out.println("Updating user with id " + id);
 
+        User currentUser = userService.findUserById(id);
+
+        if (currentUser == null) {
+            System.out.println("User with id " + id + " was not found!");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        currentUser.setName(user.getName());
+        currentUser.setEmail(user.getEmail());
+        currentUser.setPassword(user.getPassword());
+
+        //TODO: Implement updating current user
+
+        return null;
+    }
+
+    /* DELETE USER */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable Integer id, @RequestBody User user) {
+        userService.deleteUser(user);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 }

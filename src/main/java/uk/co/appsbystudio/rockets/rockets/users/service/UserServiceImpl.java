@@ -1,11 +1,12 @@
-package uk.co.appsbystudio.rockets.rockets.users;
+package uk.co.appsbystudio.rockets.rockets.users.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import uk.co.appsbystudio.rockets.rockets.users.UserRepository;
+import uk.co.appsbystudio.rockets.rockets.users.model.User;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -50,5 +51,10 @@ public class UserServiceImpl implements UserService {
         user.setCreated(new Date());
         user.setPictureUri("/" + user.getName() + "/profile.png");
         userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        userRepository.delete(user);
     }
 }

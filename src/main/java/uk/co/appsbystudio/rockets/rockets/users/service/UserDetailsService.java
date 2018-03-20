@@ -1,10 +1,11 @@
-package uk.co.appsbystudio.rockets.rockets.users;
+package uk.co.appsbystudio.rockets.rockets.users.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import uk.co.appsbystudio.rockets.rockets.users.UserPrincipal;
+import uk.co.appsbystudio.rockets.rockets.users.model.User;
 
 @Service
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
