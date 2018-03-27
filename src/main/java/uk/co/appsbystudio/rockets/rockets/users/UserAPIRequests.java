@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import uk.co.appsbystudio.rockets.rockets.users.model.Authentication;
 import uk.co.appsbystudio.rockets.rockets.users.model.Session;
 import uk.co.appsbystudio.rockets.rockets.users.model.User;
 import uk.co.appsbystudio.rockets.rockets.users.sessionservice.SessionService;
@@ -112,7 +113,7 @@ public class UserAPIRequests {
 
     /* CREATE NEW SESSION */
     @PostMapping("/{name}/session")
-    public ResponseEntity<String> createSession(@PathVariable String name, @RequestBody User user) {
+    public ResponseEntity<Authentication> createSession(@PathVariable String name, @RequestBody User user) {
         User userDetails = userService.findUserByNameAndPassword(name, user.getPassword());
 
         if (userDetails == null) {
@@ -121,7 +122,14 @@ public class UserAPIRequests {
 
         String pID = sessionService.createSession(userDetails);
 
-        return new ResponseEntity<>(pID, HttpStatus.CREATED);
+        Authentication authentication = new Authentication();
+        authentication.setUsername(name);
+        authentication.setUserId(userDetails.getId());
+        authentication.setPID(pID);
+        authentication.setPicUri(userDetails.getPictureUri());
+        authentication.setFindByEmail(userDetails.getFindByEmail());
+
+        return new ResponseEntity<>(authentication, HttpStatus.CREATED);
     }
 
 }

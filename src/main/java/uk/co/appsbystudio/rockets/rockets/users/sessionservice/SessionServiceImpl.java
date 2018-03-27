@@ -10,6 +10,7 @@ import uk.co.appsbystudio.rockets.rockets.users.model.User;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 @Service("sessionService")
 public class SessionServiceImpl implements SessionService {
@@ -34,7 +35,9 @@ public class SessionServiceImpl implements SessionService {
         calendar.setTime(new Date());
         calendar.add(Calendar.HOUR_OF_DAY, 12);
 
-        session.setpID(bCryptPasswordEncoder.encode(user.getName() + String.valueOf(System.currentTimeMillis())));
+        UUID uuid = UUID.randomUUID();
+
+        session.setpID(uuid.toString());
         session.setUserID(user.getId());
         session.setCreated(new Date());
         session.setExpires(calendar.getTime());
