@@ -1,4 +1,4 @@
-package uk.co.appsbystudio.rockets.rockets.users.service;
+package uk.co.appsbystudio.rockets.rockets.users.userservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +15,12 @@ public class UserDetailsService implements org.springframework.security.core.use
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("Load User By Username");
         User user = userService.findUserByName(username);
-        return new UserPrincipal(user);
+        System.out.println(user.getName());
+
+        UserDetails userDetails = new UserPrincipal(user);
+
+        return userDetails;
     }
 }

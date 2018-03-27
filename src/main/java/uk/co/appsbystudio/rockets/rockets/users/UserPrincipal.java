@@ -10,6 +10,8 @@ public class UserPrincipal implements UserDetails {
 
     private User user;
 
+    public UserPrincipal() {}
+
     public UserPrincipal(User user) {
         this.user = user;
     }
@@ -51,5 +53,9 @@ public class UserPrincipal implements UserDetails {
 
     public User getUser() {
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

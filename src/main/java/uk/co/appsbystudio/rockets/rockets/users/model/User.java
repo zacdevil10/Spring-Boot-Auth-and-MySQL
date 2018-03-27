@@ -35,7 +35,7 @@ public class User {
     private String password;
 
     @Column(name = "created")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
     @Column(name = "modified")

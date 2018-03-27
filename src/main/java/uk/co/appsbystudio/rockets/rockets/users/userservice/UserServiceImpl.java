@@ -1,4 +1,4 @@
-package uk.co.appsbystudio.rockets.rockets.users.service;
+package uk.co.appsbystudio.rockets.rockets.users.userservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,6 +38,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
+    }
+
+    @Override
+    public User findUserByNameAndPassword(String name, String password) {
+        User user = userRepository.findUserByName(name);
+
+        if (user == null) {
+            return null;
+        }
+
+        if (bCryptPasswordEncoder.matches(password, user.getPassword())) {
+            return user;
+        }
+
+        return null;
     }
 
     @Override

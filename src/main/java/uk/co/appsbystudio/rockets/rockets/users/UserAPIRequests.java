@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import uk.co.appsbystudio.rockets.rockets.users.model.Session;
 import uk.co.appsbystudio.rockets.rockets.users.model.User;
-import uk.co.appsbystudio.rockets.rockets.users.service.UserService;
+import uk.co.appsbystudio.rockets.rockets.users.sessionservice.SessionService;
+import uk.co.appsbystudio.rockets.rockets.users.userservice.UserService;
 
 import java.util.List;
 
@@ -18,6 +20,11 @@ public class UserAPIRequests {
 
     @Autowired
     public UserService userService;
+
+    @Autowired
+    public SessionService sessionService;
+
+    //USERS
 
     /* RETRIEVE ALL USERS */
     @GetMapping("/all")
@@ -83,6 +90,38 @@ public class UserAPIRequests {
     public ResponseEntity<User> deleteUser(@PathVariable Integer id, @RequestBody User user) {
         userService.deleteUser(user);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    //SESSION
+
+    /* RETRIEVE SESSION */
+    @GetMapping("/{id}/session/{pID}")
+    public ResponseEntity<Void> getUserSession(@PathVariable Integer id, @PathVariable String pID) {
+        System.out.println("Fetching session for user with id: " + id);
+
+        Session session = sessionService.findSessionByPID(pID);
+
+        if (session == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        //TODO: Return session (if valid) and user
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /* CREATE NEW SESSION */
+    @PostMapping("/{name}/session")
+    public ResponseEntity<String> createSession(@PathVariable String name, @RequestBody User user) {
+        User userDetails = userService.findUserByNameAndPassword(name, user.getPassword());
+
+        if (userDetails == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        String pID = sessionService.createSession(userDetails);
+
+        return new ResponseEntity<>(pID, HttpStatus.CREATED);
     }
 
 }

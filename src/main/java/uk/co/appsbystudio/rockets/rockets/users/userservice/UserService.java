@@ -1,4 +1,4 @@
-package uk.co.appsbystudio.rockets.rockets.users.service;
+package uk.co.appsbystudio.rockets.rockets.users.userservice;
 
 import uk.co.appsbystudio.rockets.rockets.users.model.User;
 
@@ -9,6 +9,7 @@ public interface UserService {
     User findUserById(Integer id);
     User findUserByName(String name);
     User findUserByEmail(String name);
+    User findUserByNameAndPassword(String name, String password);
     boolean isUserExist(User user);
     void saveUser(User user);
     void deleteUser(User user);
